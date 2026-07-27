@@ -13,14 +13,25 @@
 - I2C1 LCD 상태 출력, TIM2·EXTI IR 간격 판정
 - STX / CMD / LEN / DATA / XOR / ETX 프레임과 BOARD_A / BOARD_B 빌드 분기
 
-역할은 **도어락 애플리케이션·주변장치 통합**으로 정리합니다. 개별 커밋 근거가 없어 모든 기반 코드의 독자 작성이나 기여율을 주장하지 않습니다. CMSIS·ST 헤더와 교육 기반 시작 코드가 포함됩니다.
+담당 역할은 **도어락 애플리케이션·주변장치 통합**입니다. 보드별 초기화, 인증 상태 처리, UART 명령과 출력 장치의 동작을 연결했습니다. CMSIS·ST 헤더와 교육 기반 시작 코드를 활용했습니다.
+
+| 구성 | BOARD_A · 출입 장치 | BOARD_B · 관리 콘솔 |
+| --- | --- | --- |
+| 입력 | 4×4 키패드의 EXTI 이벤트, SPI2 RC522 UID | TIM2·EXTI 기반 IR 수신, UART 상태 패킷 |
+| 출력 | TIM3 서보 PWM, TIM1 부저, LED | I2C1 LCD 화면 |
+| 보드 간 연결 | USART6 · PC6/PC7 | USART1 · PA9/PA10 |
+| 메인 흐름 | 일반 인증 → 관리자 새 입력 → 재입력의 3상태 | 명령에 따른 화면 갱신, 원격 잠금·해제 요청 |
+
+UART는 `02 / CMD / LEN / DATA / XOR / 03` 구조를 사용합니다. 수신 인터럽트가 6단계 상태 머신으로 프레임을 조립하고, 메인 루프가 9개 명령을 처리합니다. 예를 들어 payload 없는 잠금 명령은 `02 10 00 10 03`입니다.
 
 ## 문서
 
-- [완료보고서 PDF](docs/completion-report.pdf) · [수정용 Markdown](docs/completion-report.md)
+- [상세 완료보고서 PDF](docs/completion-report.pdf) · [수정용 Word](docs/completion-report.docx) · [Markdown](docs/completion-report.md)
 - [개발일지 PDF](docs/development-log.pdf) · [수정용 Markdown](docs/development-log.md)
 - [현재 빌드 결과](docs/verification.md) · [복원·공개 범위](docs/provenance.md)
 - 발표 영상: 사용자가 추후 추가할 위치입니다.
+
+완료보고서는 제출한 VGA 보고서 양식을 적용했습니다. 프로젝트 개요와 구성도, 전체 핀맵, 드라이버·인증 상태·UART 프레임의 상세 설계, 클록과 타이머 계산, 사진·빌드 결과, 문제 분석과 후속 시험 항목을 담았습니다.
 
 ## 빌드
 
