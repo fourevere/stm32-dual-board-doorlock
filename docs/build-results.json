@@ -1,0 +1,28 @@
+[
+  {
+    "board": "BOARD_A",
+    "build_at": "2026-09-12T19:58:49.446371",
+    "command": "make all BOARD_DEF=-DBOARD_A",
+    "exit_code": 0,
+    "warnings": 0,
+    "errors": 0,
+    "binary_bytes": 28208,
+    "binary_sha256": "86ea257e956bd5903536768624f9abc26489826c4abc69c2b1af7a891cd44d95",
+    "size_output": "   text\t   data\t    bss\t    dec\t    hex\tfilename\n27716 472 428 28616 6fc8 firmware/rom_0x08000000.elf\n",
+    "code_origin": "2026-07-27 snapshot; 2026-09-12 credentials replaced with examples",
+    "hardware_run": false
+  },
+  {
+    "board": "BOARD_B",
+    "build_at": "2026-09-12T19:58:52.210491",
+    "command": "make all BOARD_DEF=-DBOARD_B",
+    "exit_code": 0,
+    "warnings": 0,
+    "errors": 0,
+    "binary_bytes": 27612,
+    "binary_sha256": "8986eaab0628c79bb64c698457f51869d1f4ab1d880cd583d8b69c9a9e5f2276",
+    "size_output": "   text\t   data\t    bss\t    dec\t    hex\tfilename\n27124 468 408 28000 6d60 firmware/rom_0x08000000.elf\n",
+    "code_origin": "2026-07-27 snapshot; 2026-09-12 credentials replaced with examples",
+    "hardware_run": false
+  }
+]
